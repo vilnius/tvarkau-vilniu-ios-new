@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 });
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class Root extends React.Component<*> {
+export default class App extends React.Component<*> {
   render() {
     return (
       <View style={styles.container}>
