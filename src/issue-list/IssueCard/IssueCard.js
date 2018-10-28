@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import {
-  Text, View, Image, StyleSheet,
+  View, Image, StyleSheet,
 } from 'react-native';
+import Ellipsized from '../../common-components/Ellipsized';
 
 const styles = StyleSheet.create({
   issueCard: {
@@ -48,13 +49,6 @@ const defaultProps = {
   description: '',
   thumbnailUri: undefined,
   style: {},
-};
-
-const Ellipsized = ({ text, lines, style }: { text: string, lines?: number, style?: any}) => <Text ellipsizeMode="tail" numberOfLines={lines} style={style}>{text}</Text>;
-
-Ellipsized.defaultProps = {
-  lines: 1,
-  style: undefined,
 };
 
 const IssueCard = ({
