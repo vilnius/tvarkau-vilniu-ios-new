@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     flex: 1,
+    borderRadius: 3,
   },
   badge: {
     marginTop: 7,
