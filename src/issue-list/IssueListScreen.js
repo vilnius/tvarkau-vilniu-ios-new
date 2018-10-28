@@ -34,6 +34,7 @@ export default class IssueListScreen extends React.Component<*, State> {
             headline={issue.type_name}
             description={issue.description}
             thumbnailUri={issue.thumbnail}
+            status={issue.status}
             style={{ borderBottomWidth: '1', borderBottomColor: '#ddd' }}
           />
         ))}
