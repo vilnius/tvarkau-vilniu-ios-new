@@ -13,7 +13,7 @@ export const listIssues = async (): Promise<APIIssue[]> => {
         id: 6,
         params: {
           start: 0,
-          limit: 10,
+          limit: 100,
         },
       }),
     });

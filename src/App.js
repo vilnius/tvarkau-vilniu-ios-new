@@ -6,7 +6,7 @@ import IssueListScreen from './issue-list/IssueListScreen';
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f9f9f9',
     alignItems: 'center',
     justifyContent: 'center',
   },

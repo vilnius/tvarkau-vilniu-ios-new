@@ -16,18 +16,39 @@ const styles = StyleSheet.create({
 });
 
 type State = {
+  loading: boolean,
+  refreshing: boolean,
   issues?: APIIssue[],
 };
 
 export default class IssueListScreen extends React.Component<*, State> {
   state = {
+    // eslint-disable-next-line react/no-unused-state
+    loading: false,
+    refreshing: false,
     issues: [],
   };
 
   async componentDidMount() {
-    const issues = await listIssues();
-    this.setState({ issues });
+    await this.loadIssues();
   }
+
+  loadIssues = async () => {
+    await this.setStateAsync({ loading: true });
+    const issues = await listIssues();
+    return this.setStateAsync({ issues, loading: false });
+  };
+
+  refreshIssues = async () => {
+    await this.setStateAsync({ refreshing: true });
+    const issues = await listIssues();
+    return this.setStateAsync({ issues, refreshing: false });
+  };
+
+  // $FlowFixMe
+  setStateAsync = (state: any) => new Promise((resolve) => {
+    this.setState(state, resolve);
+  });
 
   // eslint-disable-next-line react/no-unused-prop-types
   renderItem = ({ item }: { item: APIIssue }) => (
@@ -46,7 +67,7 @@ export default class IssueListScreen extends React.Component<*, State> {
   );
 
   render() {
-    const { issues } = this.state;
+    const { issues, refreshing } = this.state;
 
     return (
       <View style={styles.issueListContainer}>
@@ -55,6 +76,10 @@ export default class IssueListScreen extends React.Component<*, State> {
           renderItem={this.renderItem}
           keyExtractor={this.extractKey}
           ItemSeparatorComponent={this.separator}
+          onRefresh={() => {
+            this.refreshIssues();
+          }}
+          refreshing={refreshing}
         />
       </View>
     );
