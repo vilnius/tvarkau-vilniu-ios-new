@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   },
   contentPart: {
     flex: 1,
-    textAlign: 'left',
     paddingRight: 10,
   },
   thumbnailPart: {
