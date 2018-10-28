@@ -1,12 +1,17 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { listIssues } from '../api/legacyApi';
 import type { APIIssue } from '../api/types';
 import IssueCard from './IssueCard/IssueCard';
 
 const styles = StyleSheet.create({
   issueListContainer: {
+    width: '100%',
+  },
+  listSeparator: {
+    height: 1,
+    backgroundColor: '#ddd',
   },
 });
 
@@ -24,20 +29,33 @@ export default class IssueListScreen extends React.Component<*, State> {
     this.setState({ issues });
   }
 
+  // eslint-disable-next-line react/no-unused-prop-types
+  renderItem = ({ item }: { item: APIIssue }) => (
+    <IssueCard
+      headline={item.type_name}
+      description={item.description}
+      thumbnailUri={item.thumbnail}
+      status={item.status}
+    />
+  );
+
+  extractKey = (item: APIIssue): string => String(item.problem_id);
+
+  separator = () => (
+    <View style={styles.listSeparator} />
+  );
+
   render() {
     const { issues } = this.state;
 
     return (
       <View style={styles.issueListContainer}>
-        {(issues || []).map(issue => (
-          <IssueCard
-            headline={issue.type_name}
-            description={issue.description}
-            thumbnailUri={issue.thumbnail}
-            status={issue.status}
-            style={{ borderBottomWidth: '1', borderBottomColor: '#ddd' }}
-          />
-        ))}
+        <FlatList
+          data={issues}
+          renderItem={this.renderItem}
+          keyExtractor={this.extractKey}
+          ItemSeparatorComponent={this.separator}
+        />
       </View>
     );
   }
