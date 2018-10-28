@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import IssueListScreen from './issueList/IssueListScreen';
+import IssueListScreen from './issue-list/IssueListScreen';
 
 const styles = StyleSheet.create({
   container: {
