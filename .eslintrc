@@ -24,7 +24,8 @@
         "optionalDependencies": false,
         "peerDependencies": false
       }
-    ]
+    ],
+    "no-console": 0 // Use console errors until error logging is set up
   },
   "env": {
     "jest": true
