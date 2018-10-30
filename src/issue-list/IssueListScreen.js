@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 type State = {
+  page: number,
   loading: boolean,
   refreshing: boolean,
   issues?: APIIssue[],
@@ -23,6 +24,7 @@ type State = {
 
 export default class IssueListScreen extends React.Component<*, State> {
   state = {
+    page: 1,
     // eslint-disable-next-line react/no-unused-state
     loading: false,
     refreshing: false,
@@ -30,16 +32,26 @@ export default class IssueListScreen extends React.Component<*, State> {
   };
 
   async componentDidMount() {
-    await this.loadIssues();
+    await this.initialFetch();
   }
 
-  loadIssues = async () => {
+  initialFetch = async () => {
     await this.setStateAsync({ loading: true });
     const issues = await listIssues();
     return this.setStateAsync({ issues, loading: false });
   };
 
-  refreshIssues = async () => {
+  fetchMore = async () => {
+    const { page } = this.state;
+    const nextPage = page + 1;
+    const issues = await listIssues({ page: nextPage });
+    this.setState(prevState => ({
+      page: nextPage,
+      issues: [].concat(prevState.issues || [], issues),
+    }));
+  };
+
+  refresh = async () => {
     await this.setStateAsync({ refreshing: true });
     const issues = await listIssues();
     return this.setStateAsync({ issues, refreshing: false });
@@ -77,8 +89,12 @@ export default class IssueListScreen extends React.Component<*, State> {
           keyExtractor={this.extractKey}
           ItemSeparatorComponent={this.separator}
           onRefresh={() => {
-            this.refreshIssues();
+            this.refresh();
           }}
+          onEndReached={() => {
+            this.fetchMore();
+          }}
+          onEndReachedThreshold={0.5}
           refreshing={refreshing}
         />
       </View>
