@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import type { StatusType } from '../api/model';
-import Badge from '../common-components/Badge';
+import Badge from './Badge';
 import { STATUS } from '../api/model';
 
 type Props = {

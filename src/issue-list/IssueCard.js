@@ -4,7 +4,7 @@ import {
   View, Image, StyleSheet,
 } from 'react-native';
 import Ellipsized from '../common-components/Ellipsized';
-import StatusBadge from './StatusBadge';
+import StatusBadge from '../common-components/StatusBadge';
 import type { StatusType } from '../api/model';
 
 const styles = StyleSheet.create({
