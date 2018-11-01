@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { listIssues } from '../api/legacyApi';
-import IssueCard from './IssueCard/IssueCard';
+import IssueCard from './IssueCard';
 import type { Issue } from '../api/model';
 
 const styles = StyleSheet.create({

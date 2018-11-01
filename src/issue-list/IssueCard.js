@@ -3,8 +3,9 @@ import * as React from 'react';
 import {
   View, Image, StyleSheet,
 } from 'react-native';
-import Ellipsized from '../../common-components/Ellipsized';
-import Badge from '../../common-components/Badge';
+import Ellipsized from '../common-components/Ellipsized';
+import StatusBadge from './StatusBadge';
+import type { StatusType } from '../api/model';
 
 const styles = StyleSheet.create({
   issueCard: {
@@ -47,7 +48,7 @@ type Props = {
   description?: string,
   thumbnailUri?: string,
   style?: any,
-  status?: string,
+  status: StatusType,
 };
 
 const defaultProps = {
@@ -55,7 +56,6 @@ const defaultProps = {
   description: '',
   thumbnailUri: undefined,
   style: {},
-  status: undefined,
 };
 
 const IssueCard = ({
@@ -65,7 +65,7 @@ const IssueCard = ({
     <View style={styles.contentPart}>
       <Ellipsized text={headline || ''} style={styles.headline} />
       <Ellipsized text={description || ''} lines={2} style={styles.description} />
-      {status && <Badge text={status} color="#39b54a" style={styles.badge} />}
+      {status && <StatusBadge status={status} style={styles.badge} />}
     </View>
     <View style={styles.thumbnailPart}>
       {thumbnailUri && <Image source={{ uri: thumbnailUri }} style={styles.thumbnail} />}
