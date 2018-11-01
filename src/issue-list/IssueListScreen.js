@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import {
+  FlatList, StyleSheet, TouchableHighlight, View,
+} from 'react-native';
 import { listIssues } from '../api/legacyApi';
 import IssueCard from './IssueCard';
 import type { Issue } from '../api/model';
@@ -15,6 +17,10 @@ const styles = StyleSheet.create({
   },
 });
 
+type Props = {
+  navigator: any,
+};
+
 type State = {
   page: number,
   loading: boolean,
@@ -22,7 +28,7 @@ type State = {
   issues?: Issue[],
 };
 
-export default class IssueListScreen extends React.Component<*, State> {
+export default class IssueListScreen extends React.Component<Props, State> {
   state = {
     page: 1,
     // eslint-disable-next-line react/no-unused-state
@@ -62,14 +68,27 @@ export default class IssueListScreen extends React.Component<*, State> {
     this.setState(state, resolve);
   });
 
+  goToIssue = (issue: Issue): void => {
+    const { navigator } = this.props;
+    // eslint-disable-next-line global-require
+    const IssueViewScreen = require('../issue-view/IssueViewScreen').default;
+    navigator.push({
+      component: IssueViewScreen,
+      title: issue.documentId,
+      passProps: { id: issue.id },
+    });
+  };
+
   // eslint-disable-next-line react/no-unused-prop-types
   renderItem = ({ item }: { item: Issue }) => (
-    <IssueCard
-      headline={item.category}
-      description={item.description}
-      thumbnailUri={item.thumbnail}
-      status={item.status}
-    />
+    <TouchableHighlight onPress={() => this.goToIssue(item)}>
+      <IssueCard
+        headline={item.category}
+        description={item.description}
+        thumbnailUri={item.thumbnail}
+        status={item.status}
+      />
+    </TouchableHighlight>
   );
 
   extractKey = (item: Issue): string => String(item.id);

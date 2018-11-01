@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, View, TabBarIOS } from 'react-native';
+import {
+  StyleSheet, View, NavigatorIOS, TabBarIOS,
+} from 'react-native';
 import IssueListScreen from './issue-list/IssueListScreen';
 
 const styles = StyleSheet.create({
@@ -17,6 +19,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: '100%',
+    flex: 1,
   },
 });
 
@@ -37,7 +40,16 @@ export default class App extends React.Component<*> {
             icon={{ uri: fontAwesome.list, scale: 2 }}
             selected
           >
-            <IssueListScreen />
+            <NavigatorIOS
+              style={styles.screen}
+              translucent={false}
+              initialRoute={{
+                title: 'Pranešimai',
+                backButtonTitle: '   ',
+                navigationBarHidden: true,
+                component: IssueListScreen,
+              }}
+            />
           </TabBarIOS.Item>
         </TabBarIOS>
       </View>
