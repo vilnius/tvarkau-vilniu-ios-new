@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { listIssues } from '../api/legacyApi';
-import type { APIIssue } from '../api/types';
 import IssueCard from './IssueCard/IssueCard';
+import type { Issue } from '../api/model';
 
 const styles = StyleSheet.create({
   issueListContainer: {
@@ -19,7 +19,7 @@ type State = {
   page: number,
   loading: boolean,
   refreshing: boolean,
-  issues?: APIIssue[],
+  issues?: Issue[],
 };
 
 export default class IssueListScreen extends React.Component<*, State> {
@@ -63,16 +63,16 @@ export default class IssueListScreen extends React.Component<*, State> {
   });
 
   // eslint-disable-next-line react/no-unused-prop-types
-  renderItem = ({ item }: { item: APIIssue }) => (
+  renderItem = ({ item }: { item: Issue }) => (
     <IssueCard
-      headline={item.type_name}
+      headline={item.category}
       description={item.description}
       thumbnailUri={item.thumbnail}
       status={item.status}
     />
   );
 
-  extractKey = (item: APIIssue): string => String(item.problem_id);
+  extractKey = (item: Issue): string => String(item.id);
 
   separator = () => (
     <View style={styles.listSeparator} />
