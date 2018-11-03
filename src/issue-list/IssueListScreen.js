@@ -7,16 +7,6 @@ import { listIssues } from '../api/legacyApi';
 import IssueCard from './IssueCard';
 import type { Issue } from '../api/model';
 
-const styles = StyleSheet.create({
-  issueListContainer: {
-    width: '100%',
-  },
-  listSeparator: {
-    height: 1,
-    backgroundColor: '#ddd',
-  },
-});
-
 type Props = {
   navigator: any,
 };
@@ -120,3 +110,13 @@ export default class IssueListScreen extends React.Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  issueListContainer: {
+    width: '100%',
+  },
+  listSeparator: {
+    height: 1,
+    backgroundColor: '#ddd',
+  },
+});

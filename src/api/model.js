@@ -1,5 +1,4 @@
 // @flow
-
 // eslint-disable-next-line import/prefer-default-export
 export const STATUS = Object.freeze({
   REGISTERED: 'REGISTERED',

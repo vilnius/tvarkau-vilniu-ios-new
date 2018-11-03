@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import type { StatusType } from '../api/model';
 import Badge from './Badge';
@@ -29,7 +28,7 @@ const STATUS_COLORS = {
   [STATUS.POSTPONED]: '#8f8e94',
 };
 
-class StatusBadge extends React.PureComponent<Props> {
+export default class StatusBadge extends React.PureComponent<Props> {
   static defaultProps = {
     style: undefined,
   };
@@ -43,5 +42,3 @@ class StatusBadge extends React.PureComponent<Props> {
     );
   }
 }
-
-export default StatusBadge;

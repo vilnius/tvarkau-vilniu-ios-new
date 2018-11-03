@@ -1,11 +1,44 @@
 // @flow
 import * as React from 'react';
-import {
-  View, Image, StyleSheet,
-} from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Ellipsized from '../common-components/Ellipsized';
 import StatusBadge from '../common-components/StatusBadge';
 import type { StatusType } from '../api/model';
+
+type Props = {
+  headline?: string,
+  description?: string,
+  thumbnailUri?: string,
+  style?: any,
+  status: StatusType,
+};
+
+export default class IssueCard extends React.PureComponent<Props> {
+  static defaultProps = {
+    headline: '',
+    description: '',
+    thumbnailUri: undefined,
+    style: {},
+  };
+
+  render() {
+    const {
+      headline, description, thumbnailUri, style, status,
+    } = this.props;
+    return (
+      <View style={[styles.issueCard, style]}>
+        <View style={styles.contentPart}>
+          <Ellipsized text={headline || ''} style={styles.headline} />
+          <Ellipsized text={description || ''} lines={2} style={styles.description} />
+          {status && <StatusBadge status={status} style={styles.badge} />}
+        </View>
+        <View style={styles.thumbnailPart}>
+          {thumbnailUri && <Image source={{ uri: thumbnailUri }} style={styles.thumbnail} />}
+        </View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   issueCard: {
@@ -42,37 +75,3 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
 });
-
-type Props = {
-  headline?: string,
-  description?: string,
-  thumbnailUri?: string,
-  style?: any,
-  status: StatusType,
-};
-
-const defaultProps = {
-  headline: '',
-  description: '',
-  thumbnailUri: undefined,
-  style: {},
-};
-
-const IssueCard = ({
-  headline, description, thumbnailUri, style, status,
-}: Props) => (
-  <View style={[styles.issueCard, style]}>
-    <View style={styles.contentPart}>
-      <Ellipsized text={headline || ''} style={styles.headline} />
-      <Ellipsized text={description || ''} lines={2} style={styles.description} />
-      {status && <StatusBadge status={status} style={styles.badge} />}
-    </View>
-    <View style={styles.thumbnailPart}>
-      {thumbnailUri && <Image source={{ uri: thumbnailUri }} style={styles.thumbnail} />}
-    </View>
-  </View>
-);
-
-IssueCard.defaultProps = defaultProps;
-
-export default IssueCard;

@@ -25,7 +25,8 @@
         "peerDependencies": false
       }
     ],
-    "no-console": 0 // Use console errors until error logging is set up
+    "no-console": 0,  // Use console errors until error logging is set up
+    "no-use-before-define": 0 // To define styles at the bottom
   },
   "env": {
     "jest": true

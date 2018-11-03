@@ -1,12 +1,27 @@
 // @flow
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   text: string,
   color: string,
   style?: any,
 };
+
+export default class Badge extends React.PureComponent<Props> {
+  static defaultProps = {
+    style: undefined,
+  };
+
+  render() {
+    const { text, color, style } = this.props;
+    return (
+      <View style={[styles.badge, { backgroundColor: color }, style]}>
+        <Text style={styles.badgeText}>{text.toUpperCase()}</Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   badge: {
@@ -20,17 +35,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-const defaultProps = {
-  style: undefined,
-};
-
-const Badge = ({ text, color, style }: Props) => (
-  <View style={[styles.badge, { backgroundColor: color }, style]}>
-    <Text style={styles.badgeText}>{text.toUpperCase()}</Text>
-  </View>
-);
-
-Badge.defaultProps = defaultProps;
-
-export default Badge;

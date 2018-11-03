@@ -6,14 +6,18 @@ type Props = {
   id: number,
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
+export default class IssueViewScreen extends React.Component<Props> {
+  render() {
+    const { id } = this.props;
+    return (
+      <View style={styles.issueViewContainer}>
+        <Text>Pranešimas {id}</Text>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   issueViewContainer: {},
 });
-
-const IssueViewScreen = ({ id }: Props) => (
-  <View style={styles.issueViewContainer}>
-    <Text>Pranešimas {id}</Text>
-  </View>
-);
-
-export default IssueViewScreen;

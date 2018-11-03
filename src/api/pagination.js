@@ -1,5 +1,4 @@
 // @flow
-
 const PAGE_SIZE = 50;
 
 export type Pagination = {
