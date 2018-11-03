@@ -89,3 +89,22 @@ export const listIssues = async (pagination?: Pagination): Promise<Issue[]> => {
     return [];
   }
 };
+
+export const getIssue = async (id: number): Promise<?Issue> => {
+  const params = { id };
+  try {
+    const response = await fetch(LEGACY_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        method: 'get_report',
+        id: 7,
+        params,
+      }),
+    });
+    const json = await response.json();
+    return toIssue(json.result);
+  } catch (error) {
+    console.error(`Error loading issue: ${id}`, error);
+    return null;
+  }
+};
