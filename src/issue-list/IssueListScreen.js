@@ -91,7 +91,7 @@ export default class IssueListScreen extends React.Component<Props, State> {
     const { issues, refreshing } = this.state;
 
     return (
-      <View style={styles.issueListContainer}>
+      <View style={styles.container}>
         <FlatList
           data={issues}
           renderItem={this.renderItem}
@@ -112,7 +112,7 @@ export default class IssueListScreen extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  issueListContainer: {
+  container: {
     width: '100%',
   },
   listSeparator: {

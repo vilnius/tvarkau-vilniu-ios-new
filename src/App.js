@@ -14,7 +14,7 @@ const fontAwesome = {
 export default class App extends React.Component<*> {
   render() {
     return (
-      <View style={styles.appContainer}>
+      <View style={styles.container}>
         <View style={styles.appBar} />
         <TabBarIOS style={styles.screen}>
           <TabBarIOS.Item
@@ -40,7 +40,7 @@ export default class App extends React.Component<*> {
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
+  container: {
     flex: 1,
     backgroundColor: '#f9f9f9',
     alignItems: 'center',
