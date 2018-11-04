@@ -33,5 +33,5 @@ export type Issue = {
   answerDate?: string,
   location?: Location,
   thumbnail?: string,
-  photo?: string[]
+  photos: string[],
 }

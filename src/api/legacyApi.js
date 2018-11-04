@@ -68,7 +68,7 @@ const toIssue = (apiIssue: APIIssue): Issue => ({
     } : undefined,
   } : undefined,
   thumbnail: apiIssue.thumbnail,
-  photo: apiIssue.photo,
+  photos: apiIssue.photo || [],
 });
 
 export const listIssues = async (pagination?: Pagination): Promise<Issue[]> => {

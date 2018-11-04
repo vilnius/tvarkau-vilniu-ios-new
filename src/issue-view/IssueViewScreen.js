@@ -1,9 +1,12 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, View,
+} from 'react-native';
 import type { Issue } from '../api/model';
 import { getIssue } from '../api/legacyApi';
 import StatusBadge from '../common-components/StatusBadge';
+import PhotosCarousel from './PhotosCarousel';
 
 type Props = {
   id: number,
@@ -64,6 +67,9 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     }
     return (
       <View>
+        {issue.photos.length && (
+          <PhotosCarousel photos={issue.photos} />
+        )}
         <View style={styles.header}>
           <Text style={styles.headerCategory}>{issue.category}</Text>
           <View style={styles.headerStatus}>
