@@ -4,6 +4,7 @@
   "plugins": [
     "react",
     "flowtype",
+    "flowtype-errors",
     "jsx-a11y",
     "import"
   ],
@@ -26,7 +27,8 @@
       }
     ],
     "no-console": 0,  // Use console errors until error logging is set up
-    "no-use-before-define": 0 // To define styles at the bottom
+    "no-use-before-define": 0, // To define styles at the bottom
+    "flowtype-errors/show-errors": 2
   },
   "env": {
     "jest": true

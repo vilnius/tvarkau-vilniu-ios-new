@@ -2,12 +2,6 @@
 ; We fork some components by platform
 .*/*[.]android.js
 
-; Ignore templates for 'react-native init'
-.*/local-cli/templates/.*
-
-; Ignore the Dangerfile
-<PROJECT_ROOT>/bots/dangerfile.js
-
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
@@ -25,15 +19,16 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
-; Ignore various node_modules
-<PROJECT_ROOT>/node_modules/react-native-gesture-handler/.*
-<PROJECT_ROOT>/node_modules/expo/.*
-<PROJECT_ROOT>/node_modules/react-navigation/.*
-<PROJECT_ROOT>/node_modules/xdl/.*
-<PROJECT_ROOT>/node_modules/reqwest/.*
-<PROJECT_ROOT>/node_modules/metro-bundler/.*
-; Ignore Fbemitter
-<PROJECT_ROOT>/node_modules/fbemitter/.*
+[untyped]
+; https://github.com/facebook/react-native/issues/19812#issuecomment-431893188
+.*/node_modules/react-native/Libraries/Components/Navigation/NavigatorIOS.ios.js
+.*/node_modules/react-native/Libraries/Components/TextInput/InputAccessoryView.js
+.*/node_modules/react-native/Libraries/Components/View/ViewPropTypes.js
+.*/node_modules/react-native/Libraries/LayoutAnimation/LayoutAnimation.js
+.*/node_modules/react-native/Libraries/StyleSheet/StyleSheetValidation.js
+.*/node_modules/react-native/Libraries/StyleSheet/processTransform.js
+.*/node_modules/react-native/Libraries/Text/TextAncestor.js
+.*/node_modules/react-native/Libraries/Components/SafeAreaView/SafeAreaView.ios.js
 
 [include]
 
@@ -45,21 +40,43 @@ node_modules/react-native/flow-github/
 [options]
 emoji=true
 
+esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
+
 module.system=haste
+module.system.haste.use_name_reducers=true
+# get basename
+module.system.haste.name_reducers='^.*/\([a-zA-Z0-9$_.-]+\.js\(\.flow\)?\)$' -> '\1'
+# strip .js or .js.flow suffix
+module.system.haste.name_reducers='^\(.*\)\.js\(\.flow\)?$' -> '\1'
+# strip .ios suffix
+module.system.haste.name_reducers='^\(.*\)\.ios$' -> '\1'
+module.system.haste.name_reducers='^\(.*\)\.android$' -> '\1'
+module.system.haste.name_reducers='^\(.*\)\.native$' -> '\1'
+module.system.haste.paths.blacklist=.*/__tests__/.*
+module.system.haste.paths.blacklist=.*/__mocks__/.*
+module.system.haste.paths.blacklist=<PROJECT_ROOT>/node_modules/react-native/Libraries/Animated/src/polyfills/.*
+module.system.haste.paths.whitelist=<PROJECT_ROOT>/node_modules/react-native/Libraries/.*
 
 munge_underscores=true
 
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
+
+module.file_ext=.ios.js
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.native.js
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 suppress_type=$FlowFixMeProps
 suppress_type=$FlowFixMeState
 
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)?:? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-0.67.1
+^0.85.0
