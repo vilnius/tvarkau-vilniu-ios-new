@@ -54,7 +54,7 @@ const toStatus = (s?: string): StatusType => {
 const toIssue = (apiIssue: APIIssue): Issue => ({
   id: apiIssue.problem_id,
   documentId: apiIssue.docNo,
-  date: apiIssue.report_date,
+  date: apiIssue.report_date || apiIssue.entry_date,
   category: apiIssue.type || apiIssue.type_name,
   description: apiIssue.description,
   status: toStatus(apiIssue.status),

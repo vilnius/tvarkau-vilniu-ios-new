@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { Issue } from '../api/model';
 import { getIssue } from '../api/legacyApi';
+import StatusBadge from '../common-components/StatusBadge';
 
 type Props = {
   id: number,
@@ -36,39 +37,87 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     this.setState(state, resolve);
   });
 
+  renderReport = (issue: Issue) => (
+    <View style={styles.entry}>
+      <View style={styles.entryHeader}>
+        <Text style={styles.entryHeaderCaption}>Pranešimas</Text>
+        <Text style={styles.entryHeaderDate}>{issue.date}</Text>
+      </View>
+      <Text style={styles.entryContent}>{issue.description}</Text>
+    </View>
+  );
+
+  renderAnswer = (issue: Issue) => (
+    <View style={[styles.entry, styles.answer]}>
+      <View style={styles.entryHeader}>
+        <Text style={styles.entryHeaderCaption}>Atsakymas</Text>
+        <Text style={styles.entryHeaderDate}>{issue.answerDate}</Text>
+      </View>
+      <Text style={styles.entryContent}>{issue.answer}</Text>
+    </View>
+  );
+
   render() {
     const { issue } = this.state;
     if (!issue) {
       return <View />;
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.category}>{issue.category}</Text>
+      <View>
+        <View style={styles.header}>
+          <Text style={styles.headerCategory}>{issue.category}</Text>
+          <View style={styles.headerStatus}>
+            <StatusBadge status={issue.status} />
+          </View>
+        </View>
         {issue.location && issue.location.address && (
-          <Text style={styles.address}>{issue.location.address}</Text>
+          <Text style={styles.location}>{issue.location.address}</Text>
         )}
-        <Text style={styles.reportLabel}>Pranešimas</Text>
-        <Text style={styles.description}>{issue.description}</Text>
+        {this.renderReport(issue)}
+        {issue.answer && (
+          this.renderAnswer(issue)
+        )}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
+    flexDirection: 'row',
     padding: 10,
   },
-  category: {
+  headerCategory: {
     fontSize: 20,
-    marginBottom: 20,
+    flexGrow: 1,
+    width: 100,
   },
-  address: {
-    marginBottom: 20,
+  headerStatus: {
+    marginTop: 5,
+    width: 100,
   },
-  reportLabel: {
-    marginBottom: 20,
+  location: {
+    padding: 10,
   },
-  description: {
-    marginBottom: 20,
+  entry: {
+    padding: 10,
+  },
+  answer: {
+    backgroundColor: '#f2f2f2',
+  },
+  entryHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  entryHeaderCaption: {
+    fontWeight: 'bold',
+  },
+  entryHeaderDate: {
+    color: '#9a9a9e',
+  },
+  entryContent: {
+    fontSize: 14,
+    lineHeight: 21,
   },
 });
