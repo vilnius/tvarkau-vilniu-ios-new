@@ -30,10 +30,10 @@ export default class IssueCard extends React.PureComponent<Props> {
         <View style={styles.contentPart}>
           <Ellipsized text={headline || ''} style={styles.headline} />
           <Ellipsized text={description || ''} lines={2} style={styles.description} />
-          {status && <StatusBadge status={status} style={styles.statusBadge} />}
+          {!!status && <StatusBadge status={status} style={styles.statusBadge} />}
         </View>
         <View style={styles.thumbnailPart}>
-          {thumbnailUri && <Image source={{ uri: thumbnailUri }} style={styles.thumbnail} />}
+          {!!thumbnailUri && <Image source={{ uri: thumbnailUri }} style={styles.thumbnail} />}
         </View>
       </View>
     );

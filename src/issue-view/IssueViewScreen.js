@@ -67,7 +67,7 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     }
     return (
       <View>
-        {issue.photos.length && (
+        {!!issue.photos.length && (
           <PhotosCarousel photos={issue.photos} />
         )}
         <View style={styles.header}>
@@ -76,11 +76,11 @@ export default class IssueViewScreen extends React.Component<Props, State> {
             <StatusBadge status={issue.status} />
           </View>
         </View>
-        {issue.location && issue.location.address && (
+        {!!issue.location && issue.location.address && (
           <Text style={styles.location}>{issue.location.address}</Text>
         )}
         {this.renderReport(issue)}
-        {issue.answer && (
+        {!!issue.answer && (
           this.renderAnswer(issue)
         )}
       </View>
