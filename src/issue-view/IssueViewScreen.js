@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import {
+  ScrollView,
   StyleSheet, Text, View,
 } from 'react-native';
 import type { Issue } from '../api/model';
@@ -66,7 +67,7 @@ export default class IssueViewScreen extends React.Component<Props, State> {
       return <View />;
     }
     return (
-      <View>
+      <ScrollView contentInset={{ bottom: 100 }}>
         {!!issue.photos.length && (
           <PhotosCarousel photos={issue.photos} />
         )}
@@ -83,7 +84,7 @@ export default class IssueViewScreen extends React.Component<Props, State> {
         {!!issue.answer && (
           this.renderAnswer(issue)
         )}
-      </View>
+      </ScrollView>
     );
   }
 }
