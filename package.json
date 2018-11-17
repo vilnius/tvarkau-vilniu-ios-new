@@ -13,7 +13,7 @@
     "lint": "eslint src --ext js --ext jsx"
   },
   "dependencies": {
-    "expo": "^31.0.0",
+    "expo": "^31.0.4",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
     "react-native-banner-carousel": "^1.0.3"
