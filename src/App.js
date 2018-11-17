@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
 import {
-  StyleSheet, View, NavigatorIOS, TabBarIOS,
+  NavigatorIOS, StyleSheet, TabBarIOS, View,
 } from 'react-native';
 import IssueListScreen from './issue-list/IssueListScreen';
+import IssueMapScreen from './issue-map/IssueMapScreen';
 
 // list-ul-solid
 const fontAwesome = {
@@ -11,17 +12,48 @@ const fontAwesome = {
   map: 'data:image/png;base64,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',
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class App extends React.Component<*> {
+type State = {
+  tabs: {
+    [string]: {|
+      title: string,
+      iconUri: string,
+    |},
+  },
+  activeTab: string,
+};
+
+export default class App extends React.Component<*, State> {
+  state = {
+    tabs: {
+      list: {
+        title: 'Pranešimai',
+        iconUri: fontAwesome.list,
+      },
+      map: {
+        title: 'Žemėlapis',
+        iconUri: fontAwesome.map,
+      },
+    },
+    activeTab: 'list',
+  };
+
+  switchTabTo = (id: string) => {
+    this.setState({
+      activeTab: id,
+    });
+  };
+
   render() {
+    const { tabs, activeTab } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.appBar} />
         <TabBarIOS style={styles.screen}>
           <TabBarIOS.Item
-            title="Pranešimai"
-            icon={{ uri: fontAwesome.list, scale: 2 }}
-            selected
+            title={tabs.list.title}
+            icon={{ uri: tabs.list.iconUri, scale: 3 }}
+            selected={activeTab === 'list'}
+            onPress={() => this.switchTabTo('list')}
           >
             <NavigatorIOS
               style={styles.screen}
@@ -31,6 +63,22 @@ export default class App extends React.Component<*> {
                 backButtonTitle: '   ',
                 navigationBarHidden: true,
                 component: IssueListScreen,
+              }}
+            />
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title={tabs.map.title}
+            icon={{ uri: tabs.map.iconUri, scale: 3 }}
+            selected={activeTab === 'map'}
+            onPress={() => this.switchTabTo('map')}
+          >
+            <NavigatorIOS
+              style={styles.screen}
+              translucent={false}
+              initialRoute={{
+                title: 'Žemėlapis',
+                navigationBarHidden: true,
+                component: IssueMapScreen,
               }}
             />
           </TabBarIOS.Item>
