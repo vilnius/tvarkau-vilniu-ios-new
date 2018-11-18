@@ -3,6 +3,7 @@ import * as React from 'react';
 import type { StatusType } from '../api/model';
 import Badge from './Badge';
 import { STATUS } from '../api/model';
+import statusColor from '../pallette/statusColor';
 
 type Props = {
   status: StatusType,
@@ -19,15 +20,6 @@ const STATUS_TEXTS = {
   [STATUS.POSTPONED]: 'Atidėta',
 };
 
-const STATUS_COLORS = {
-  [STATUS.REGISTERED]: '#0f76bb',
-  [STATUS.IN_PROGRESS]: '#0f76bb',
-  [STATUS.DONE]: '#39b54a',
-  [STATUS.RESOLVED]: '#39b54a',
-  [STATUS.REDIRECTED]: '#ff9600',
-  [STATUS.POSTPONED]: '#8f8e94',
-};
-
 export default class StatusBadge extends React.PureComponent<Props> {
   static defaultProps = {
     style: undefined,
@@ -36,7 +28,7 @@ export default class StatusBadge extends React.PureComponent<Props> {
   render() {
     const { status, style } = this.props;
     const text = STATUS_TEXTS[status];
-    const color = STATUS_COLORS[status];
+    const color = statusColor(status);
     return (
       <Badge text={text} color={color} style={style} />
     );
