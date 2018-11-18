@@ -5,6 +5,7 @@ import { MapView } from 'expo';
 import type { Coordinates, Issue } from '../api/model';
 import { listIssues } from '../api/legacyApi';
 import statusColor from '../pallette/statusColor';
+import Callout from './Callout';
 
 type Props = {};
 
@@ -43,35 +44,39 @@ export default class IssueMapScreen extends React.Component<Props, State> {
     this.setState(state, resolve);
   });
 
+  renderMarkers = (issues: Issue[]): React.Node[] => issues
+    .filter(issue => issue.location && issue.location.address && issue.location.coordinates)
+    .map(issue => (
+      <MapView.Marker
+        key={issue.id}
+        coordinate={{
+          // $FlowFixMe
+          latitude: issue.location.coordinates.lat,
+          // $FlowFixMe
+          longitude: issue.location.coordinates.lon,
+        }}
+        title={issue.category}
+        // $FlowFixMe
+        description={issue.location.address}
+        pinColor={statusColor(issue.status)}
+      >
+        <MapView.Callout tooltip>
+          <Callout
+            thumbnail={issue.thumbnail}
+            title={issue.category || ''}
+            // $FlowFixMe
+            description={issue.location.address}
+          />
+        </MapView.Callout>
+      </MapView.Marker>
+    ));
+
+
   render() {
     const { issues } = this.state;
     if (!issues) {
       return <View />;
     }
-    const markers = issues
-      .filter(issue => issue.location && issue.location.address && issue.location.coordinates)
-      .map(issue => ({
-        identifier: issue.id,
-        title: issue.category,
-        // $FlowFixMe
-        description: issue.location.address,
-        coordinate: {
-          // $FlowFixMe
-          latitude: issue.location.coordinates.lat,
-          // $FlowFixMe
-          longitude: issue.location.coordinates.lon,
-        },
-        pinColor: statusColor(issue.status),
-      }))
-      .map(marker => (
-        <MapView.Marker
-          key={marker.identifier}
-          coordinate={marker.coordinate}
-          title={marker.title}
-          description={marker.description}
-          pinColor={marker.pinColor}
-        />
-      ));
     return (
       <MapView
         style={{ flex: 1 }}
@@ -82,7 +87,7 @@ export default class IssueMapScreen extends React.Component<Props, State> {
           longitudeDelta: 0.075,
         }}
       >
-        {markers}
+        {this.renderMarkers(issues)}
       </MapView>
     );
   }
