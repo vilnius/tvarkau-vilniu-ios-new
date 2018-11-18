@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 5,
+    height: 34,
     color: '#909095',
   },
   thumbnail: {
