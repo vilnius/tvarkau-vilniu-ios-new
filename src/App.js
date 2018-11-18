@@ -77,6 +77,7 @@ export default class App extends React.Component<*, State> {
               translucent={false}
               initialRoute={{
                 title: 'Žemėlapis',
+                backButtonTitle: '   ',
                 navigationBarHidden: true,
                 component: IssueMapScreen,
               }}

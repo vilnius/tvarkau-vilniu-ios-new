@@ -7,7 +7,9 @@ import { listIssues } from '../api/legacyApi';
 import statusColor from '../pallette/statusColor';
 import Callout from './Callout';
 
-type Props = {};
+type Props = {
+  navigator: any,
+};
 
 type State = {
   loading: boolean,
@@ -44,6 +46,17 @@ export default class IssueMapScreen extends React.Component<Props, State> {
     this.setState(state, resolve);
   });
 
+  goToIssue = (issue: Issue): void => {
+    const { navigator } = this.props;
+    // eslint-disable-next-line global-require
+    const IssueViewScreen = require('../issue-view/IssueViewScreen').default;
+    navigator.push({
+      component: IssueViewScreen,
+      title: issue.documentId,
+      passProps: { id: issue.id },
+    });
+  };
+
   renderMarkers = (issues: Issue[]): React.Node[] => issues
     .filter(issue => issue.location && issue.location.address && issue.location.coordinates)
     .map(issue => (
@@ -60,7 +73,9 @@ export default class IssueMapScreen extends React.Component<Props, State> {
         description={issue.location.address}
         pinColor={statusColor(issue.status)}
       >
-        <MapView.Callout>
+        <MapView.Callout
+          onPress={() => this.goToIssue(issue)}
+        >
           <Callout
             thumbnail={issue.thumbnail}
             title={issue.category || ''}
