@@ -60,7 +60,7 @@ export default class IssueMapScreen extends React.Component<Props, State> {
         description={issue.location.address}
         pinColor={statusColor(issue.status)}
       >
-        <MapView.Callout tooltip>
+        <MapView.Callout>
           <Callout
             thumbnail={issue.thumbnail}
             title={issue.category || ''}

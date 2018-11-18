@@ -48,19 +48,22 @@ export default class Callout extends React.PureComponent<Props> {
   }
 }
 
+// Can remove relative positioning after this is merged:
+// https://github.com/react-community/react-native-maps/pull/1847
+const bubbleInset = 12;
+
 const styles = StyleSheet.create({
   callout: {
     backgroundColor: 'white',
     flexDirection: 'row',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#edece9',
-    overflow: 'hidden',
     width: 350,
-    height: 60,
+    height: 60 - 2 * bubbleInset - 1,
   },
   thumbnailPart: {
     flex: 0,
+    position: 'relative',
+    top: -bubbleInset,
+    left: -bubbleInset,
     width: 60,
     height: 60,
   },
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
   },
   contentPart: {
     flex: 1,
-    padding: 8,
+    marginTop: 8 - bubbleInset,
   },
   title: {
     fontSize: 18,
