@@ -56,7 +56,7 @@ const toIssue = (apiIssue: APIIssue): Issue => ({
   documentId: apiIssue.docNo,
   date: apiIssue.report_date || apiIssue.entry_date,
   category: apiIssue.type || apiIssue.type_name,
-  description: apiIssue.description,
+  description: apiIssue.description.replace(/<br>/gi, '\n'),
   status: toStatus(apiIssue.status),
   answer: apiIssue.answer,
   answerDate: apiIssue.complete_date,

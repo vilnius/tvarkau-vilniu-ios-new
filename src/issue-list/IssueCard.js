@@ -7,7 +7,7 @@ import type { StatusType } from '../api/model';
 
 type Props = {
   headline?: string,
-  description?: string,
+  description: string,
   thumbnailUri?: string,
   style?: any,
   status: StatusType,
@@ -16,7 +16,6 @@ type Props = {
 export default class IssueCard extends React.PureComponent<Props> {
   static defaultProps = {
     headline: '',
-    description: '',
     thumbnailUri: undefined,
     style: {},
   };
@@ -29,7 +28,7 @@ export default class IssueCard extends React.PureComponent<Props> {
       <View style={[styles.issueCard, style]}>
         <View style={styles.contentPart}>
           <Ellipsized text={headline || ''} style={styles.headline} />
-          <Ellipsized text={description || ''} lines={2} style={styles.description} />
+          <Ellipsized text={description} lines={2} style={styles.description} />
           {!!status && <StatusBadge status={status} style={styles.statusBadge} />}
         </View>
         <View style={styles.thumbnailPart}>

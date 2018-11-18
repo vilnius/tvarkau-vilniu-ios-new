@@ -27,7 +27,7 @@ export type Issue = {
   documentId?: string,
   date?: string,
   category?: string,
-  description?: string,
+  description: string,
   status: StatusType,
   answer?: string,
   answerDate?: string,
