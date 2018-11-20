@@ -1,8 +1,6 @@
 // @flow
 import * as React from 'react';
-import {
-  View, Image, StyleSheet, Dimensions,
-} from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Ellipsized from '../common-components/Ellipsized';
 
@@ -30,10 +28,7 @@ export default class Callout extends React.PureComponent<Props> {
       <View style={[styles.callout, adaptiveStyles.callout]}>
         {!!thumbnail && (
           <View style={styles.thumbnailPart}>
-            <Image
-              style={styles.thumbnail}
-              source={{ uri: thumbnail }}
-            />
+            <Image style={styles.thumbnail} source={{ uri: thumbnail }} />
           </View>
         )}
         <View style={styles.contentPart}>

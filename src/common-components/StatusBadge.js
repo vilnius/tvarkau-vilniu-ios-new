@@ -29,8 +29,6 @@ export default class StatusBadge extends React.PureComponent<Props> {
     const { status, style } = this.props;
     const text = STATUS_TEXTS[status];
     const color = statusColor(status);
-    return (
-      <Badge text={text} color={color} style={style} />
-    );
+    return <Badge text={text} color={color} style={style} />;
   }
 }

@@ -1,8 +1,6 @@
 // @flow
 import * as React from 'react';
-import {
-  StyleSheet, View, Image, Dimensions,
-} from 'react-native';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
 
 type Props = {

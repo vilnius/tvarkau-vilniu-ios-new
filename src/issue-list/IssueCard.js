@@ -21,9 +21,7 @@ export default class IssueCard extends React.PureComponent<Props> {
   };
 
   render() {
-    const {
-      headline, description, thumbnailUri, style, status,
-    } = this.props;
+    const { headline, description, thumbnailUri, style, status } = this.props;
     return (
       <View style={[styles.issueCard, style]}>
         <View style={styles.contentPart}>

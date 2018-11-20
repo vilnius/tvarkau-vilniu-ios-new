@@ -14,10 +14,7 @@ export default class SettingsScreen extends React.Component<Props, State> {
     return (
       <ScrollView contentInset={{ bottom: 100, top: 30 }} style={styles.container}>
         <Section>
-          <SectionRow
-            left="Pranešėjas"
-            right="Anonimiškai"
-          />
+          <SectionRow left="Pranešėjas" right="Anonimiškai" />
         </Section>
       </ScrollView>
     );

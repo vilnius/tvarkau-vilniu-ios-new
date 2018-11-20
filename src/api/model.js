@@ -34,4 +34,4 @@ export type Issue = {
   location?: Location,
   thumbnail?: string,
   photos: string[],
-}
+};

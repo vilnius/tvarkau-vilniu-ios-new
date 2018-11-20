@@ -17,11 +17,8 @@ export default class Ellipsized extends React.PureComponent<Props> {
   render() {
     const { text, lines, style } = this.props;
     return (
-      <Text
-        ellipsizeMode="tail"
-        numberOfLines={lines}
-        style={style}
-      >{text}
+      <Text ellipsizeMode="tail" numberOfLines={lines} style={style}>
+        {text}
       </Text>
     );
   }

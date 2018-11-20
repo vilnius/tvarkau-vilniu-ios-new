@@ -1,9 +1,6 @@
 // @flow
 import * as React from 'react';
-import {
-  ScrollView,
-  StyleSheet, Text, View,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { Issue } from '../api/model';
 import { getIssue } from '../api/legacyApi';
 import StatusBadge from '../common-components/StatusBadge';
@@ -36,10 +33,11 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     return this.setStateAsync({ issue, loading: false });
   };
 
-  // $FlowFixMe
-  setStateAsync = (state: any) => new Promise((resolve) => {
-    this.setState(state, resolve);
-  });
+  setStateAsync = (state: any) =>
+    // $FlowFixMe
+    new Promise(resolve => {
+      this.setState(state, resolve);
+    });
 
   renderReport = (issue: Issue) => (
     <View style={styles.entry}>
@@ -68,22 +66,16 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     }
     return (
       <ScrollView contentInset={{ bottom: 100 }}>
-        {!!issue.photos.length && (
-          <PhotosCarousel photos={issue.photos} />
-        )}
+        {!!issue.photos.length && <PhotosCarousel photos={issue.photos} />}
         <View style={styles.header}>
           <Text style={styles.headerCategory}>{issue.category}</Text>
           <View style={styles.headerStatus}>
             <StatusBadge status={issue.status} />
           </View>
         </View>
-        {!!issue.location && issue.location.address && (
-          <Text style={styles.location}>{issue.location.address}</Text>
-        )}
+        {!!issue.location && issue.location.address && <Text style={styles.location}>{issue.location.address}</Text>}
         {this.renderReport(issue)}
-        {!!issue.answer && (
-          this.renderAnswer(issue)
-        )}
+        {!!issue.answer && this.renderAnswer(issue)}
       </ScrollView>
     );
   }

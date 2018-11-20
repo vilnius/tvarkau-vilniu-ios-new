@@ -60,13 +60,19 @@ const toIssue = (apiIssue: APIIssue): Issue => ({
   status: toStatus(apiIssue.status),
   answer: apiIssue.answer,
   answerDate: apiIssue.complete_date,
-  location: (apiIssue.x && apiIssue.y) || apiIssue.address ? {
-    address: apiIssue.address,
-    coordinates: (apiIssue.x && apiIssue.y) ? {
-      lon: apiIssue.x,
-      lat: apiIssue.y,
-    } : undefined,
-  } : undefined,
+  location:
+    (apiIssue.x && apiIssue.y) || apiIssue.address
+      ? {
+          address: apiIssue.address,
+          coordinates:
+            apiIssue.x && apiIssue.y
+              ? {
+                  lon: apiIssue.x,
+                  lat: apiIssue.y,
+                }
+              : undefined,
+        }
+      : undefined,
   thumbnail: apiIssue.thumbnail,
   photos: apiIssue.photo || [],
 });

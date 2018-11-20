@@ -1,8 +1,6 @@
 // @flow
 import * as React from 'react';
-import {
-  FlatList, StyleSheet, TouchableHighlight, View,
-} from 'react-native';
+import { FlatList, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { listIssues } from '../api/legacyApi';
 import IssueCard from './IssueCard';
 import type { Issue } from '../api/model';
@@ -53,10 +51,11 @@ export default class IssueListScreen extends React.Component<Props, State> {
     return this.setStateAsync({ issues, refreshing: false });
   };
 
-  // $FlowFixMe
-  setStateAsync = (state: any) => new Promise((resolve) => {
-    this.setState(state, resolve);
-  });
+  setStateAsync = (state: any) =>
+    // $FlowFixMe
+    new Promise(resolve => {
+      this.setState(state, resolve);
+    });
 
   goToIssue = (issue: Issue): void => {
     const { navigator } = this.props;
@@ -83,9 +82,7 @@ export default class IssueListScreen extends React.Component<Props, State> {
 
   extractKey = (item: Issue): string => String(item.id);
 
-  separator = () => (
-    <View style={styles.listSeparator} />
-  );
+  separator = () => <View style={styles.listSeparator} />;
 
   render() {
     const { issues, refreshing } = this.state;

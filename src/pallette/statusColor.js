@@ -11,7 +11,6 @@ const STATUS_COLORS = {
   [STATUS.POSTPONED]: '#8f8e94',
 };
 
-const statusColor = (status: StatusType): string => STATUS_COLORS[status]
-  || STATUS_COLORS[STATUS.REGISTERED];
+const statusColor = (status: StatusType): string => STATUS_COLORS[status] || STATUS_COLORS[STATUS.REGISTERED];
 
 export default statusColor;

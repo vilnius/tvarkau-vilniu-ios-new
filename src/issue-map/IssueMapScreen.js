@@ -41,10 +41,11 @@ export default class IssueMapScreen extends React.Component<Props, State> {
     });
   };
 
-  // $FlowFixMe
-  setStateAsync = (state: any) => new Promise((resolve) => {
-    this.setState(state, resolve);
-  });
+  setStateAsync = (state: any) =>
+    // $FlowFixMe
+    new Promise(resolve => {
+      this.setState(state, resolve);
+    });
 
   goToIssue = (issue: Issue): void => {
     const { navigator } = this.props;
@@ -57,35 +58,33 @@ export default class IssueMapScreen extends React.Component<Props, State> {
     });
   };
 
-  renderMarkers = (issues: Issue[]): React.Node[] => issues
-    .filter(issue => issue.location && issue.location.address && issue.location.coordinates)
-    .map(issue => (
-      <MapView.Marker
-        key={issue.id}
-        coordinate={{
-          // $FlowFixMe
-          latitude: issue.location.coordinates.lat,
-          // $FlowFixMe
-          longitude: issue.location.coordinates.lon,
-        }}
-        title={issue.category}
-        // $FlowFixMe
-        description={issue.location.address}
-        pinColor={statusColor(issue.status)}
-      >
-        <MapView.Callout
-          onPress={() => this.goToIssue(issue)}
-        >
-          <Callout
-            thumbnail={issue.thumbnail}
-            title={issue.category || ''}
+  renderMarkers = (issues: Issue[]): React.Node[] =>
+    issues
+      .filter(issue => issue.location && issue.location.address && issue.location.coordinates)
+      .map(issue => (
+        <MapView.Marker
+          key={issue.id}
+          coordinate={{
             // $FlowFixMe
-            description={issue.location.address}
-          />
-        </MapView.Callout>
-      </MapView.Marker>
-    ));
-
+            latitude: issue.location.coordinates.lat,
+            // $FlowFixMe
+            longitude: issue.location.coordinates.lon,
+          }}
+          title={issue.category}
+          // $FlowFixMe
+          description={issue.location.address}
+          pinColor={statusColor(issue.status)}
+        >
+          <MapView.Callout onPress={() => this.goToIssue(issue)}>
+            <Callout
+              thumbnail={issue.thumbnail}
+              title={issue.category || ''}
+              // $FlowFixMe
+              description={issue.location.address}
+            />
+          </MapView.Callout>
+        </MapView.Marker>
+      ));
 
   render() {
     const { issues } = this.state;

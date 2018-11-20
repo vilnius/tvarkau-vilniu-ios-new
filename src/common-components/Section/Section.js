@@ -9,9 +9,7 @@ type Props = {
 export default class Section extends React.PureComponent<Props> {
   render() {
     const { children } = this.props;
-    return (
-      <View style={styles.container}>{children}</View>
-    );
+    return <View style={styles.container}>{children}</View>;
   }
 }
 
