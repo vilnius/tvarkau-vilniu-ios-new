@@ -41,8 +41,7 @@ export default class IssueMapScreen extends React.Component<Props, State> {
     });
   };
 
-  setStateAsync = (state: any) =>
-    // $FlowFixMe
+  setStateAsync = (state: any): Promise<void> =>
     new Promise(resolve => {
       this.setState(state, resolve);
     });

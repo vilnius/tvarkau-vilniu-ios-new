@@ -33,8 +33,7 @@ export default class IssueViewScreen extends React.Component<Props, State> {
     return this.setStateAsync({ issue, loading: false });
   };
 
-  setStateAsync = (state: any) =>
-    // $FlowFixMe
+  setStateAsync = (state: any): Promise<void> =>
     new Promise(resolve => {
       this.setState(state, resolve);
     });

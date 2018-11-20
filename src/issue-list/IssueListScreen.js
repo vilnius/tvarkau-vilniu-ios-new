@@ -51,8 +51,7 @@ export default class IssueListScreen extends React.Component<Props, State> {
     return this.setStateAsync({ issues, refreshing: false });
   };
 
-  setStateAsync = (state: any) =>
-    // $FlowFixMe
+  setStateAsync = (state: any): Promise<void> =>
     new Promise(resolve => {
       this.setState(state, resolve);
     });
