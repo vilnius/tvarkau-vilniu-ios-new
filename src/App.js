@@ -102,7 +102,7 @@ export default class App extends React.Component<*, State> {
               initialRoute={{
                 title: 'Nustatymai',
                 backButtonTitle: '   ',
-                navigationBarHidden: true,
+                navigationBarHidden: false,
                 component: SettingsScreen,
               }}
             />
