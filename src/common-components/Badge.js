@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { iOSColors } from 'react-native-typography';
+import AppText from './AppText';
 
 type Props = {
   text: string,
@@ -17,7 +19,9 @@ export default class Badge extends React.PureComponent<Props> {
     const { text, color, style } = this.props;
     return (
       <View style={[styles.badge, { backgroundColor: color }, style]}>
-        <Text style={styles.badgeText}>{text.toUpperCase()}</Text>
+        <AppText tertiary style={styles.badgeText}>
+          {text.toUpperCase()}
+        </AppText>
       </View>
     );
   }
@@ -30,8 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   badgeText: {
-    fontSize: 11,
-    color: 'white',
+    color: iOSColors.white,
     textAlign: 'center',
   },
 });

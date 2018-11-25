@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
+import { iOSColors } from 'react-native-typography';
 
 type Props = {
   photos: string[],
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
     height: 250,
   },
   activePhotoIndicator: {
-    backgroundColor: '#fff',
+    backgroundColor: iOSColors.white,
   },
 });

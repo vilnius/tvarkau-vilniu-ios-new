@@ -1,7 +1,9 @@
 // @flow
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Body, Content, List, ListItem, Text, Right, Icon } from 'native-base';
+import { Container, Body, Content, List, ListItem, Right, Icon } from 'native-base';
+import { iOSColors } from 'react-native-typography';
+import AppText from '../common-components/AppText';
 
 type Props = {
   navigator: any,
@@ -30,7 +32,7 @@ export default class SettingsScreen extends React.Component<Props, State> {
             <ListItem itemDivider />
             <ListItem last onPress={() => this.goToEditProfile()}>
               <Body>
-                <Text numberOfLines={1}>Pranešėjas</Text>
+                <AppText>Pranešėjas</AppText>
               </Body>
               <Right>
                 <Icon name="arrow-forward" />
@@ -39,8 +41,10 @@ export default class SettingsScreen extends React.Component<Props, State> {
             <ListItem itemDivider />
             <ListItem first last button>
               <Body>
-                <Text>Prisijungti į vilnius.lt profilį</Text>
-                <Text style={styles.secondaryText}>Paskutinis importavimas: 2018-11-19 17:47</Text>
+                <AppText>Prisijungti į vilnius.lt profilį</AppText>
+                <AppText secondary gray>
+                  Paskutinis importavimas: 2018-11-19 17:47
+                </AppText>
               </Body>
               <Right>
                 <Icon name="arrow-forward" />
@@ -49,12 +53,12 @@ export default class SettingsScreen extends React.Component<Props, State> {
             <ListItem itemDivider />
             <ListItem>
               <Body>
-                <Text>Apie &quot;Tvarkau Vilnių&quot;</Text>
+                <AppText>Apie &quot;Tvarkau Vilnių&quot;</AppText>
               </Body>
             </ListItem>
             <ListItem>
               <Body>
-                <Text>Privatumo politika</Text>
+                <AppText>Privatumo politika</AppText>
               </Body>
               <Right>
                 <Icon name="arrow-forward" />
@@ -62,10 +66,10 @@ export default class SettingsScreen extends React.Component<Props, State> {
             </ListItem>
             <ListItem last>
               <Body>
-                <Text>Programėlės versija</Text>
+                <AppText>Programėlės versija</AppText>
               </Body>
               <Right>
-                <Text style={styles.rightText}>Gamybinė</Text>
+                <AppText gray>Gamybinė</AppText>
               </Right>
             </ListItem>
           </List>
@@ -80,13 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
   list: {
-    backgroundColor: '#fff',
-  },
-  secondaryText: {
-    fontSize: 15,
-    color: '#909095',
-  },
-  rightText: {
-    color: '#909095',
+    backgroundColor: iOSColors.white,
   },
 });

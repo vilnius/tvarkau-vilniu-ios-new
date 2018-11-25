@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { MapView } from 'expo';
 import type { Coordinates, Issue } from '../api/model';
 import { listIssues } from '../api/legacyApi';
-import statusColor from '../pallette/statusColor';
+import statusColor from '../theme/statusColor';
 import Callout from './Callout';
 
 type Props = {

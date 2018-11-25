@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { StatusType } from '../api/model';
 import Badge from './Badge';
 import { STATUS } from '../api/model';
-import statusColor from '../pallette/statusColor';
+import statusColor from '../theme/statusColor';
 
 type Props = {
   status: StatusType,

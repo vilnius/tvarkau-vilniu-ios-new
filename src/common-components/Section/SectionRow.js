@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import AppText from '../AppText';
 
 type Props = {
   left: string,
@@ -13,10 +14,10 @@ export default class SectionRow extends React.PureComponent<Props> {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.leftText}>{left}</Text>
+          <AppText>{left}</AppText>
         </View>
         <View style={styles.right}>
-          <Text style={styles.rightText}>{right}</Text>
+          <AppText secondary>{right}</AppText>
         </View>
       </View>
     );
@@ -33,12 +34,5 @@ const styles = StyleSheet.create({
   },
   right: {
     marginRight: 10,
-  },
-  leftText: {
-    fontSize: 17,
-  },
-  rightText: {
-    color: '#b3b3b3',
-    fontSize: 17,
   },
 });

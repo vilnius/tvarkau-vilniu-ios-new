@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { View, Image, StyleSheet, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import Ellipsized from '../common-components/Ellipsized';
+import { iOSColors } from 'react-native-typography';
+import AppText from '../common-components/AppText';
 
 type Props = {
   thumbnail?: string,
@@ -32,8 +33,8 @@ export default class Callout extends React.PureComponent<Props> {
           </View>
         )}
         <View style={styles.contentPart}>
-          <Ellipsized text={title} style={styles.title} />
-          <Ellipsized text={description} style={styles.description} />
+          <AppText>{title}</AppText>
+          <AppText secondary>{description}</AppText>
         </View>
         <View style={styles.arrow}>
           <FontAwesome name="angle-right" size={24} color="#cacaca" />
@@ -49,7 +50,7 @@ const bubbleInset = 12;
 
 const styles = StyleSheet.create({
   callout: {
-    backgroundColor: 'white',
+    backgroundColor: iOSColors.white,
     flexDirection: 'row',
     width: 350,
     height: 60 - 2 * bubbleInset - 1,
@@ -69,11 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 8 - bubbleInset,
   },
-  title: {
-    fontSize: 18,
-  },
   description: {
-    fontSize: 14,
     lineHeight: 21,
   },
   arrow: {

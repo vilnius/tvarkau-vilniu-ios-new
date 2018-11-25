@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import type { Issue } from '../api/model';
 import { getIssue } from '../api/legacyApi';
 import StatusBadge from '../common-components/StatusBadge';
 import PhotosCarousel from './PhotosCarousel';
+import AppText from '../common-components/AppText';
 
 type Props = {
   id: number,
@@ -41,20 +42,28 @@ export default class IssueViewScreen extends React.Component<Props, State> {
   renderReport = (issue: Issue) => (
     <View style={styles.entry}>
       <View style={styles.entryHeader}>
-        <Text style={styles.entryHeaderCaption}>Pranešimas</Text>
-        <Text style={styles.entryHeaderDate}>{issue.date}</Text>
+        <AppText headline>Pranešimas</AppText>
+        <AppText secondary gray>
+          {issue.date}
+        </AppText>
       </View>
-      <Text style={styles.entryContent}>{issue.description}</Text>
+      <AppText secondary ellipsis={false}>
+        {issue.description}
+      </AppText>
     </View>
   );
 
   renderAnswer = (issue: Issue) => (
     <View style={[styles.entry, styles.answer]}>
       <View style={styles.entryHeader}>
-        <Text style={styles.entryHeaderCaption}>Atsakymas</Text>
-        <Text style={styles.entryHeaderDate}>{issue.answerDate}</Text>
+        <AppText headline>Atsakymas</AppText>
+        <AppText secondary gray>
+          {issue.answerDate}
+        </AppText>
       </View>
-      <Text style={styles.entryContent}>{issue.answer}</Text>
+      <AppText secondary ellipsis={false}>
+        {issue.answer}
+      </AppText>
     </View>
   );
 
@@ -67,12 +76,18 @@ export default class IssueViewScreen extends React.Component<Props, State> {
       <ScrollView contentInset={{ bottom: 100 }}>
         {!!issue.photos.length && <PhotosCarousel photos={issue.photos} />}
         <View style={styles.header}>
-          <Text style={styles.headerCategory}>{issue.category}</Text>
+          <AppText headline style={styles.headerCategory} lines={2}>
+            {issue.category}
+          </AppText>
           <View style={styles.headerStatus}>
             <StatusBadge status={issue.status} />
           </View>
         </View>
-        {!!issue.location && issue.location.address && <Text style={styles.location}>{issue.location.address}</Text>}
+        {!!issue.location && issue.location.address && (
+          <AppText secondary style={styles.location}>
+            {issue.location.address}
+          </AppText>
+        )}
         {this.renderReport(issue)}
         {!!issue.answer && this.renderAnswer(issue)}
       </ScrollView>
@@ -86,7 +101,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   headerCategory: {
-    fontSize: 20,
     flexGrow: 1,
     width: 100,
   },
@@ -107,15 +121,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8,
-  },
-  entryHeaderCaption: {
-    fontWeight: 'bold',
-  },
-  entryHeaderDate: {
-    color: '#9a9a9e',
-  },
-  entryContent: {
-    fontSize: 14,
-    lineHeight: 21,
   },
 });
