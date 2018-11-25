@@ -16,11 +16,10 @@ export default class SettingsScreen extends React.Component<Props, State> {
   goToEditProfile = (): void => {
     const { navigator } = this.props;
     // eslint-disable-next-line global-require
-    const IssueViewScreen = require('../issue-view/IssueViewScreen').default;
+    const ProfileEditScreen = require('../profile-edit/ProfileEditScreen').default;
     navigator.push({
-      component: IssueViewScreen,
-      title: 'test',
-      passProps: { id: 15555 },
+      component: ProfileEditScreen,
+      title: 'Pranešėjo profilis',
     });
   };
 
@@ -33,6 +32,9 @@ export default class SettingsScreen extends React.Component<Props, State> {
             <ListItem last onPress={() => this.goToEditProfile()}>
               <Body>
                 <AppText>Pranešėjas</AppText>
+                <AppText secondary gray>
+                  Anonimas
+                </AppText>
               </Body>
               <Right>
                 <Icon name="arrow-forward" />
