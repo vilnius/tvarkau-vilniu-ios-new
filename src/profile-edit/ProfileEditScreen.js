@@ -27,6 +27,13 @@ export default class ProfileEditScreen extends React.Component<Props, State> {
     phoneNumber: undefined,
   };
 
+  inputRefs = {
+    fullName: undefined,
+    personalId: undefined,
+    email: undefined,
+    phoneNumber: undefined,
+  };
+
   renderProfileForm = () => {
     const { fullName, personalId, email, phoneNumber } = this.state;
     return (
@@ -34,38 +41,56 @@ export default class ProfileEditScreen extends React.Component<Props, State> {
         <Item inlineLabel>
           <Label>Vardas pavardė</Label>
           <Input
+            ref={c => {
+              this.inputRefs.fullName = c;
+            }}
             returnKeyType="next"
             autoCorrect={false}
             value={fullName}
             onValueChange={val => this.setState({ fullName: val })}
+            // $FlowFixMe
+            onSubmitEditing={() => this.inputRefs.personalId._root.focus()} // eslint-disable-line no-underscore-dangle
           />
         </Item>
         <Item inlineLabel>
           <Label>Asmens kodas</Label>
           <Input
+            ref={c => {
+              this.inputRefs.personalId = c;
+            }}
             keyboardType="numeric"
             maxLength={11}
             secureTextEntry
-            returnKeyType="next"
+            returnKeyType="done" // "next" does not work with numeric keyboard at the time of writing
             autoCorrect={false}
             value={personalId}
             onValueChange={val => this.setState({ personalId: val })}
+            // $FlowFixMe
+            onSubmitEditing={() => this.inputRefs.email._root.focus()} // eslint-disable-line no-underscore-dangle
           />
         </Item>
         <Item inlineLabel>
           <Label>El. paštas</Label>
           <Input
+            ref={c => {
+              this.inputRefs.email = c;
+            }}
             textContentType="emailAddress"
             keyboardType="email-address"
             returnKeyType="next"
             autoCorrect={false}
             value={email}
             onValueChange={val => this.setState({ email: val })}
+            // $FlowFixMe
+            onSubmitEditing={() => this.inputRefs.phoneNumber._root.focus()} // eslint-disable-line no-underscore-dangle
           />
         </Item>
         <Item inlineLabel>
           <Label>Telefonas</Label>
           <Input
+            ref={c => {
+              this.inputRefs.phoneNumber = c;
+            }}
             textContentType="telephoneNumber"
             keyboardType="phone-pad"
             returnKeyType="done"
